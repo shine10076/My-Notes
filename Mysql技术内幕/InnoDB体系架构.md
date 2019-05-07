@@ -52,6 +52,8 @@ InnoDB存储引擎分为多个内存块，可以认为这些内存块组成了�
 
    ​	数据库中缓冲池通过LRU(Latest Recent Used)来管理内存的。但InnoDB对LRU算法做了一定的改进，新增了一个midpoint位置，新读取到的点放入midPoint位置。（默认为5/8处）
 
+   > 若直接用原始的LRU算法，那么直接读取的页将放到LRU列表首部，那么某些SQL操作会使缓冲池页被刷新出，从而影响缓冲池效率。
+
    ​	FreeList:在数据库刚启动时，LRU列表是空的，此时现在FreeList存放页
 
    ​	FlushList:脏页存放于Flush列表和LRU列表中，Flush列表用于管理脏页刷新回磁盘。
